@@ -81,7 +81,6 @@
     "singleQuote": true,
     "bracketSpacing": true,
     "arrowParens": "always",
-    "jsxBracketSameLine": false,
     "jsxSingleQuote": true
   },
   "dependencies": {
@@ -101,11 +100,13 @@
     "@nivo/geo": "^0.80.0",
     "@nivo/line": "^0.80.0",
     "@nivo/pie": "^0.80.0",
+    "@reduxjs/toolkit": "^1.9.2",
     "eslint-plugin-import": "^2.27.5",
     "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-pro-sidebar": "^1.0.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.7.0",
     "yup": "^0.32.11"
   },

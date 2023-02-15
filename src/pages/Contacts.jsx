@@ -52,7 +52,7 @@ export const Contacts = () => {
 
   return (
     <Box m='5px'>
-      <Header title='TEAM' subtitle='Managing the Team Members' />
+      <Header title='Contacts' subtitle='Contacts dashboard' />
       <Box
         m='10px 0 0 5px'
         height='75vh'

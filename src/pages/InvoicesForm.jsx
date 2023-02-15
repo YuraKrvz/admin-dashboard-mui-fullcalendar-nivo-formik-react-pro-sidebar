@@ -1,40 +1,61 @@
 import { Formik } from 'formik'
 import { Box, Button, TextField, useMediaQuery } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
 import * as yup from 'yup'
+
 import { Header } from '../components/Header'
+import { addInvoice } from '../store/invoicesSlice'
 
-export const Form = () => {
+export const InvoicesForm = () => {
   const isNonMobile = useMediaQuery('(min-width: 600px)')
+  const { invoicesSlice } = useSelector((state) => state)
+  const dispatch = useDispatch()
 
-  const handleFormSubmit = (values) => {
-    console.log(values)
+  const handleFormSubmit = (values, { resetForm }) => {
+    dispatch(
+      addInvoice({
+        id: invoicesSlice.length + 1,
+        name: values.name,
+        email: values.email,
+        age: values.age,
+        phone: values.phoneNumber,
+        cost: values.cost,
+        date: values.date,
+      }),
+    )
+    resetForm({
+      name: '',
+      age: '',
+      email: '',
+      phoneNumber: '',
+      cost: '',
+      date: '',
+    })
   }
   const phoneRegExp =
     /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/
 
   return (
     <Box m='20px'>
-      <Header title='Create user' subtitle='Create a new user profile.' />
+      <Header title='Invoices form' subtitle='Create invoice balance.' />
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={{
-          firstName: '',
-          lastName: '',
+          name: '',
+          phoneNumber: '',
           email: '',
-          contact: '',
-          address1: '',
-          address2: '',
+          cost: '',
+          date: '',
         }}
         validationSchema={yup.object().shape({
-          firstName: yup.string().required('Required first Name'),
-          lastName: yup.string().required('Required last Name'),
+          name: yup.string().required('Required first Name'),
+          cost: yup.string().required('Required last Name'),
           email: yup.string().email('Invalid email').required('required'),
-          contact: yup
+          phoneNumber: yup
             .string()
             .matches(phoneRegExp, 'Phone number is not valid')
             .required('required'),
-          address1: yup.string().required('Required address one'),
-          address2: yup.string().required('Required address two'),
+          date: yup.string().required('Required address one'),
         })}
       >
         {({ values, errors, touched, handleBlur, handleChange, handleSubmit }) => (
@@ -51,26 +72,26 @@ export const Form = () => {
                 fullWidth
                 variant='filled'
                 type='text'
-                label='First Name'
+                label='Name'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.firstName}
-                name='firstName'
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
+                value={values.name}
+                name='name'
+                error={!!touched.name && !!errors.name}
+                helperText={touched.name && errors.name}
                 sx={{ gridColumn: 'span 2' }}
               />
               <TextField
                 fullWidth
                 variant='filled'
                 type='text'
-                label='Last Name'
+                label='Phone number'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.lastName}
-                name='lastName'
-                error={!!touched.lastName && !!errors.lastName}
-                helperText={touched.lastName && errors.lastName}
+                value={values.phoneNumber}
+                name='phoneNumber'
+                error={!!touched.phoneNumber && !!errors.phoneNumber}
+                helperText={touched.phoneNumber && errors.phoneNumber}
                 sx={{ gridColumn: 'span 2' }}
               />
               <TextField
@@ -90,45 +111,32 @@ export const Form = () => {
                 fullWidth
                 variant='filled'
                 type='text'
-                label='Contact Number'
+                label='Cost'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.contact}
-                name='contact'
-                error={!!touched.contact && !!errors.contact}
-                helperText={touched.contact && errors.contact}
+                value={values.cost}
+                name='cost'
+                error={!!touched.cost && !!errors.cost}
+                helperText={touched.cost && errors.cost}
                 sx={{ gridColumn: 'span 4' }}
               />
               <TextField
                 fullWidth
                 variant='filled'
                 type='text'
-                label='Address 1'
+                label='Date'
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.address1}
-                name='address1'
-                error={!!touched.address1 && !!errors.address1}
-                helperText={touched.address1 && errors.address1}
-                sx={{ gridColumn: 'span 4' }}
-              />
-              <TextField
-                fullWidth
-                variant='filled'
-                type='text'
-                label='Address 2'
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.address2}
-                name='address2'
-                error={!!touched.address2 && !!errors.address2}
-                helperText={touched.address2 && errors.address2}
+                value={values.date}
+                name='date'
+                error={!!touched.date && !!errors.date}
+                helperText={touched.date && errors.date}
                 sx={{ gridColumn: 'span 4' }}
               />
             </Box>
             <Box display='flex' justifyContent='end' mt='20px'>
               <Button type='submit' color='secondary' variant='contained'>
-                Create user
+                Add invoice
               </Button>
             </Box>
           </form>

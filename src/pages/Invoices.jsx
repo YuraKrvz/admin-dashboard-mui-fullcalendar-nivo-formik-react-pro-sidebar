@@ -1,15 +1,21 @@
 import { DataGrid } from '@mui/x-data-grid'
 import { Box, Typography } from '@mui/material'
+import { useSelector, useDispatch } from 'react-redux'
+import CancelPresentationOutlinedIcon from '@mui/icons-material/CancelPresentationOutlined'
 
 import { Header } from '../components/Header'
-import { mockDataInvoices } from '../data/mockData'
-// import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined'
-// import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined'
-// import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined'
 import { useAppContext } from '../components/App/AppContext/AppContext'
+import { removeInvoice } from '../store/invoicesSlice'
 
 export const Invoices = () => {
   const { colors } = useAppContext()
+  const { invoicesSlice } = useSelector((state) => state)
+  const dispatch = useDispatch()
+  const handlerRemove = (inv) => {
+    if (window.confirm(`Are you shore to remove this ${inv.row.name} invoice?`)) {
+      dispatch(removeInvoice(inv.id))
+    }
+  }
 
   const columns = [
     { field: 'id', headerName: 'ID' },
@@ -42,11 +48,35 @@ export const Invoices = () => {
       headerName: 'Date',
       flex: 1,
     },
+    {
+      field: 'remove',
+      headerName: 'Remove',
+      flex: 1,
+      renderCell: (member) => {
+        return (
+          <Box
+            width='60%'
+            m='0 auto'
+            p='5px'
+            display='flex'
+            justifyContent='center'
+            backgroundColor={colors.redAccent[500]}
+            borderRadius='4px'
+            onClick={() => handlerRemove(member)}
+          >
+            <CancelPresentationOutlinedIcon />
+            <Typography color={colors.grey[100]} sx={{ ml: '5px' }}>
+              Remove
+            </Typography>
+          </Box>
+        )
+      },
+    },
   ]
 
   return (
     <Box m='5px'>
-      <Header title='TEAM' subtitle='Managing the Team Members' />
+      <Header title='Invoices dashboard' subtitle='Managing the invoices dashboard' />
       <Box
         m='10px 0 0 5px'
         height='75vh'
@@ -76,7 +106,7 @@ export const Invoices = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns} />
+        <DataGrid checkboxSelection rows={invoicesSlice} columns={columns} />
       </Box>
     </Box>
   )

@@ -13,12 +13,15 @@ import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined'
 import StackedLineChartOutlinedIcon from '@mui/icons-material/StackedLineChartOutlined'
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined'
 import DonutLargeOutlinedIcon from '@mui/icons-material/DonutLargeOutlined'
+import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined'
+
 import { useAppContext } from '../../components/App/AppContext/AppContext'
 import img from '../../assets/user.jpg'
 
 const itemsMain = [
   { id: 'dashboard', to: '/', label: 'Dashboard', icon: <DashboardOutlinedIcon /> },
   { id: 'manage-team', to: '/team', label: 'Manage team', icon: <Diversity3OutlinedIcon /> },
+  { id: 'team-form', to: '/team-form', label: 'Team Form', icon: <ContactsOutlinedIcon /> },
   {
     id: 'contatcts-information',
     to: '/contacts',
@@ -33,8 +36,8 @@ const itemsMain = [
   },
   {
     id: 'profile-form',
-    to: '/form',
-    label: 'Profile form',
+    to: '/invoices-form',
+    label: 'Invoices form',
     icon: <FormatAlignCenterOutlinedIcon />,
   },
 ]

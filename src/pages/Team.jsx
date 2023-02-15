@@ -1,15 +1,25 @@
 import { Box, Typography } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
+import { useSelector, useDispatch } from 'react-redux'
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined'
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined'
 import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined'
+import CancelPresentationOutlinedIcon from '@mui/icons-material/CancelPresentationOutlined'
 
-import { mockDataTeam } from '../data/mockData'
 import { Header } from '../components/Header'
 import { useAppContext } from '../components/App/AppContext/AppContext'
+import { removeMember } from '../store/teamSlice'
 
 export const Team = () => {
   const { colors } = useAppContext()
+  const { teamSlice } = useSelector((state) => state)
+  const dispatch = useDispatch()
+
+  const handlerRemove = (member) => {
+    if (window.confirm(`are you shore to remove this ${member.row.name} member?`)) {
+      dispatch(removeMember(member.id))
+    }
+  }
 
   const columns = [
     { field: 'id', headerName: 'ID' },
@@ -46,7 +56,7 @@ export const Team = () => {
           m='0 auto'
           p='5px'
           display='flex'
-          justifyContent='center'
+          justifyContent='space-between'
           backgroundColor={
             access === 'admin'
               ? colors.greenAccent[600]
@@ -65,11 +75,36 @@ export const Team = () => {
         </Box>
       ),
     },
+    {
+      field: 'remove',
+      headerName: 'Remove',
+      flex: 1,
+      renderCell: (member) => {
+        return (
+          <Box
+            width='60%'
+            m='0 auto'
+            p='5px'
+            display='flex'
+            justifyContent='center'
+            backgroundColor={colors.redAccent[500]}
+            borderRadius='4px'
+            onClick={() => handlerRemove(member)}
+          >
+            <CancelPresentationOutlinedIcon />
+            <Typography color={colors.grey[100]} sx={{ ml: '5px' }}>
+              Remove
+            </Typography>
+          </Box>
+        )
+      },
+    },
   ]
 
   return (
     <Box m='5px'>
       <Header title='TEAM' subtitle='Managing the Team Members' />
+
       <Box
         m='10px 0 0 5px'
         height='75vh'
@@ -79,6 +114,9 @@ export const Team = () => {
           },
           '& .MuiDataGrid-cell': {
             borderBottom: 'none',
+            '& .MuiBox-root': {
+              margin: 0,
+            },
           },
           '& .name-column--cell': {
             color: colors.greenAccent[300],
@@ -99,7 +137,7 @@ export const Team = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} />
+        <DataGrid checkboxSelection rows={teamSlice} columns={columns} />
       </Box>
     </Box>
   )
