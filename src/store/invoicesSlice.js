@@ -5,7 +5,7 @@ import { mockDataInvoices } from '../data/mockData'
 const initialState = mockDataInvoices
 
 export const invoicesSlice = createSlice({
-  name: 'invoicesSlice',
+  name: 'invoices',
   initialState,
   reducers: {
     addInvoice: (state, action) => {
@@ -17,4 +17,4 @@ export const invoicesSlice = createSlice({
 
 export const { addInvoice, removeInvoice } = invoicesSlice.actions
 
-export const selectInvoices = (state) => state
+export const selectAllInvoices = (state) => state

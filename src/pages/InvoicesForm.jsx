@@ -1,20 +1,21 @@
 import { Formik } from 'formik'
 import { Box, Button, TextField, useMediaQuery } from '@mui/material'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { nanoid } from '@reduxjs/toolkit'
 import * as yup from 'yup'
 
 import { Header } from '../components/Header'
 import { addInvoice } from '../store/invoicesSlice'
+import { phoneRegExp } from '../services/helpers'
 
 export const InvoicesForm = () => {
   const isNonMobile = useMediaQuery('(min-width: 600px)')
-  const { invoicesSlice } = useSelector((state) => state)
   const dispatch = useDispatch()
 
   const handleFormSubmit = (values, { resetForm }) => {
     dispatch(
       addInvoice({
-        id: invoicesSlice.length + 1,
+        id: nanoid,
         name: values.name,
         email: values.email,
         age: values.age,
@@ -32,8 +33,6 @@ export const InvoicesForm = () => {
       date: '',
     })
   }
-  const phoneRegExp =
-    /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/
 
   return (
     <Box m='20px'>

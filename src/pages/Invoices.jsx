@@ -5,12 +5,13 @@ import CancelPresentationOutlinedIcon from '@mui/icons-material/CancelPresentati
 
 import { Header } from '../components/Header'
 import { useAppContext } from '../components/App/AppContext/AppContext'
-import { removeInvoice } from '../store/invoicesSlice'
+import { selectAllInvoices, removeInvoice } from '../store/invoicesSlice'
 
 export const Invoices = () => {
   const { colors } = useAppContext()
-  const { invoicesSlice } = useSelector((state) => state)
+  const { invoicesSlice } = useSelector(selectAllInvoices)
   const dispatch = useDispatch()
+
   const handlerRemove = (inv) => {
     if (window.confirm(`Are you shore to remove this ${inv.row.name} invoice?`)) {
       dispatch(removeInvoice(inv.id))

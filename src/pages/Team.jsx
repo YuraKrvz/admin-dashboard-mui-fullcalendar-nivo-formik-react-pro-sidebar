@@ -8,11 +8,11 @@ import CancelPresentationOutlinedIcon from '@mui/icons-material/CancelPresentati
 
 import { Header } from '../components/Header'
 import { useAppContext } from '../components/App/AppContext/AppContext'
-import { removeMember } from '../store/teamSlice'
+import { selectAllTeam, removeMember } from '../store/teamSlice'
 
 export const Team = () => {
   const { colors } = useAppContext()
-  const { teamSlice } = useSelector((state) => state)
+  const { teamSlice } = useSelector(selectAllTeam)
   const dispatch = useDispatch()
 
   const handlerRemove = (member) => {

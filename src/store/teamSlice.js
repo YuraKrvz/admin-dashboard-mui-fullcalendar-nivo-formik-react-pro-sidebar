@@ -5,7 +5,7 @@ import { mockDataTeam } from '../data/mockData'
 const initialState = mockDataTeam
 
 export const teamSlice = createSlice({
-  name: 'teamSlice',
+  name: 'team',
   initialState,
   reducers: {
     addMember: (state, action) => {
