@@ -5,12 +5,13 @@ import CancelPresentationOutlinedIcon from '@mui/icons-material/CancelPresentati
 
 import { Header } from '../components/Header'
 import { useAppContext } from '../components/App/AppContext/AppContext'
-import { selectAllInvoices, removeInvoice } from '../store/invoicesSlice'
+import { selectAllInvoices, removeInvoice, totalInvoicesQtySelector } from '../store/invoicesSlice'
 
 export const Invoices = () => {
   const { colors } = useAppContext()
   const { invoicesSlice } = useSelector(selectAllInvoices)
   const dispatch = useDispatch()
+  const totalInvoicesQty = useSelector(totalInvoicesQtySelector)
 
   const handlerRemove = (inv) => {
     if (window.confirm(`Are you shore to remove this ${inv.row.name} invoice?`)) {
@@ -77,7 +78,10 @@ export const Invoices = () => {
 
   return (
     <Box m='5px'>
-      <Header title='Invoices dashboard' subtitle='Managing the invoices dashboard' />
+      <Header
+        title='Invoices dashboard'
+        subtitle={`Managing the invoices dashboard, total cost: ${totalInvoicesQty}`}
+      />
       <Box
         m='10px 0 0 5px'
         height='75vh'

@@ -16,5 +16,4 @@ export const teamSlice = createSlice({
 })
 
 export const { addMember, removeMember } = teamSlice.actions
-
 export const selectAllTeam = (state) => state

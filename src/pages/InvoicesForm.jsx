@@ -15,7 +15,7 @@ export const InvoicesForm = () => {
   const handleFormSubmit = (values, { resetForm }) => {
     dispatch(
       addInvoice({
-        id: nanoid,
+        id: nanoid(),
         name: values.name,
         email: values.email,
         age: values.age,

@@ -1,20 +1,25 @@
+import { useSelector } from 'react-redux'
 import { Box, Button, IconButton, Typography, useTheme } from '@mui/material'
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined'
 import EmailIcon from '@mui/icons-material/Email'
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import TrafficIcon from '@mui/icons-material/Traffic'
+
+import { totalInvoicesQtySelector, totalQtyLimitSelector } from '../store/invoicesSlice'
+import { useAppContext } from '../components/App/AppContext/AppContext'
 import { mockTransactions } from '../data/mockData'
 import { StatBox, ProgressCircle } from '../components/StatusBox'
 import { Header } from '../components/Header'
 import { LineChart } from '../components/LineChart'
 import { GeographyChart } from '../components/GeographyChart'
 import { BarChart } from '../components/BarChart'
-import { useAppContext } from '../components/App/AppContext/AppContext'
 
 export const Dashboard = () => {
   const { colors } = useAppContext()
-
+  const totalInvoice = useSelector(totalInvoicesQtySelector)
+  const limit = 30000
+  const isExceeded = useSelector((state) => totalQtyLimitSelector(state, limit))
   return (
     <Box m='5px'>
       {/* HEADER */}
@@ -32,7 +37,7 @@ export const Dashboard = () => {
             }}
           >
             <DownloadOutlinedIcon sx={{ mr: '10px' }} />
-            Download Reports
+            Download Reports {totalInvoice}
           </Button>
         </Box>
       </Box>
@@ -112,15 +117,22 @@ export const Dashboard = () => {
           >
             <Box>
               <Typography variant='h5' fontWeight='600' color={colors.grey[100]}>
-                Revenue Generated
+                Total invoice of team:
               </Typography>
               <Typography variant='h3' fontWeight='bold' color={colors.greenAccent[500]}>
-                $59,342.32
+                ${totalInvoice}
               </Typography>
             </Box>
             <Box>
               <IconButton>
-                <DownloadOutlinedIcon sx={{ fontSize: '26px', color: colors.greenAccent[500] }} />
+                {isExceeded && (
+                  <Typography variant='h5' fontWeight='600' color={colors.redAccent[500]}>
+                    Total of Team more ${limit}
+                  </Typography>
+                )}
+                <DownloadOutlinedIcon
+                  sx={{ fontSize: '26px', color: colors.greenAccent[500], ml: '10px' }}
+                />
               </IconButton>
             </Box>
           </Box>
