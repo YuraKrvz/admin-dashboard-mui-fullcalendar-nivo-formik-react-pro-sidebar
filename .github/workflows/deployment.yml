@@ -9,25 +9,25 @@ jobs:
   test
     runs-on: ubuntu-20.04
     steps:
-      - name: Get repository code
-        run: Get repository code / test
-        #uses: actions/checkout@v3
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ hashFiles('**/package-lock.json') }}-unique-key 
-      - name: Install dependencies
-        run: npm ci
-      - name: Test application
-        run: Test application...process...
+    - name: Get repository code
+      run: Get repository code / test
+      #uses: actions/checkout@v3
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ hashFiles('**/package-lock.json') }}-unique-key 
+    - name: Install dependencies
+      run: npm ci
+    - name: Test application
+      run: Test application...process...
   lint
     runs-on: ubuntu-latest
     needs: test
     steps:
-      - name: Get repository code
-        uses: actions/checkout@v3
-      - name: Cache dependencies
+    - name: Get repository code
+      uses: actions/checkout@v3
+    - name: Cache dependencies
         uses: actions/cache@v3
         with:
           path: ~/.npm
