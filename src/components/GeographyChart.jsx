@@ -50,6 +50,7 @@ export const GeographyChart = ({ isDashboard = false }) => {
       projectionRotation={[0, 0, 0]}
       borderWidth={1.5}
       borderColor='#ffffff'
+      /*eslint-disable */
       legends={
         !isDashboard
           ? [
@@ -79,6 +80,7 @@ export const GeographyChart = ({ isDashboard = false }) => {
             ]
           : undefined
       }
+      /*eslint-enable */
     />
   )
 }

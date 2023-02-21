@@ -131,7 +131,7 @@ export const getTokens = (mode) => {
 // MUI THEME SETTING
 export const themeSettings = (mode) => {
   const colors = getTokens(mode)
-
+  /*eslint-disable */
   return {
     palette: {
       mode: mode,
@@ -198,6 +198,7 @@ export const themeSettings = (mode) => {
       },
     },
   }
+  /*eslint-enable */
 }
 
 export const AppCtxTheme = createContext({

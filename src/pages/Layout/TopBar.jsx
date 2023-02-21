@@ -5,6 +5,7 @@ import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 import NightlightOutlinedIcon from '@mui/icons-material/NightlightOutlined'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined'
+
 import { useAppContext } from '../../components/App/AppContext/AppContext'
 
 export const TopBar = () => {

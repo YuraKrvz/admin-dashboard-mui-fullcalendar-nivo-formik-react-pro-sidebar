@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
+
 import { mockDataContacts } from '../data/mockData'
 import { Header } from '../components/Header'
 import { useAppContext } from '../components/App/AppContext/AppContext'

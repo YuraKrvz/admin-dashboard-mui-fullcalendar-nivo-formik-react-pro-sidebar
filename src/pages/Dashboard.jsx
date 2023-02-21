@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { Box, Button, IconButton, Typography, useTheme } from '@mui/material'
+import { Box, Button, IconButton, Typography } from '@mui/material'
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined'
 import EmailIcon from '@mui/icons-material/Email'
 import PointOfSaleIcon from '@mui/icons-material/PointOfSale'
