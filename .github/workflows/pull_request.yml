@@ -5,7 +5,7 @@ on:
     types: [opened, edited, reopened]
 jobs: 
   print:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps: 
     - name: Show context
       run: Show context github "${{ toJSON(github) }}" 
