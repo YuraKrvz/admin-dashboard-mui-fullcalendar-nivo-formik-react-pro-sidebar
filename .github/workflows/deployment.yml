@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get repository code
-        run: Get repository code
+        run: Get repository code / test
         #uses: actions/checkout@v3
       - name: Cache dependencies
         uses: actions/cache@v3
